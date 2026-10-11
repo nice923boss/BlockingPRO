@@ -1,0 +1,33 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "街頭相遇（方案 C：一鏡到底）",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 8, "lighting": "sunset" },
+  "actors": [
+    {
+      "id": "man", "name": "阿哲", "kind": "human", "preset": "man", "color": "#3d5a80",
+      "path": { "keys": [ { "t": 0, "v": [-5, 0, 0] }, { "t": 4, "v": [-0.8, 0, 0], "e": "out" } ] },
+      "upper": [ { "type": "wave", "start": 4.2, "dur": 2 } ]
+    },
+    {
+      "id": "woman", "name": "小雯", "kind": "human", "preset": "woman", "color": "#e07a5f",
+      "path": { "keys": [ { "t": 0, "v": [5, 0, 0.3] }, { "t": 4.5, "v": [0.8, 0, 0.3], "e": "out" } ] },
+      "upper": [ { "type": "talk", "start": 5.5, "dur": 2.5 } ]
+    }
+  ],
+  "props": [
+    { "id": "lamp", "type": "streetlight", "path": { "keys": [ { "t": 0, "v": [0, 0, -2.6] } ] } },
+    { "id": "bench", "type": "bench", "path": { "keys": [ { "t": 0, "v": [2.6, 0, -2.3] } ] } },
+    { "id": "tree", "type": "tree", "path": { "keys": [ { "t": 0, "v": [-3.2, 0, -3] } ] } },
+    { "id": "house", "type": "building", "path": { "keys": [ { "t": 0, "v": [0, 0, -9] } ] } }
+  ],
+  "lights": [],
+  "cameras": [
+    { "id": "camO", "name": "O 機 一鏡到底", "path": { "keys": [ { "t": 0, "v": [0, 4.2, 10], "e": "inOut" }, { "t": 4.5, "v": [0, 1.6, 4], "e": "inOut" }, { "t": 8, "v": [0.9, 1.55, 3.1] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 0, "v": [0, 0.8, 0], "e": "inOut" }, { "t": 4.5, "v": [0, 1.3, 0.15], "e": "inOut" }, { "t": 8, "v": [0.2, 1.4, 0.15] } ] }, "lens": 30 }
+  ],
+  "cuts": [
+    { "t": 0, "camera": "camO", "note": "一鏡到底：從高處降下推近，兩人相遇、揮手、聊天" }
+  ],
+  "assets": []
+}

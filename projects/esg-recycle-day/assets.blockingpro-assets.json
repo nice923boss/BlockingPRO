@@ -1,0 +1,47 @@
+{
+  "format": "blockingpro-assets",
+  "version": 1,
+  "assets": [
+    {
+      "id": "recycle_bin",
+      "label": "分類回收桶",
+      "cat": "small",
+      "color": "#2e7d32",
+      "desc": "寬 45 公分、高 85 公分的戶外資源回收桶，正面有投入口與回收標誌",
+      "parts": [
+        {"name": "桶身", "shape": "box", "size": [0.45, 0.8, 0.45], "pos": [0, 0.4, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "桶蓋", "shape": "box", "size": [0.48, 0.05, 0.48], "pos": [0, 0.825, 0], "rot": [0, 0, 0], "color": "#1b5e20"},
+        {"name": "投入口", "shape": "box", "size": [0.25, 0.04, 0.02], "pos": [0, 0.7, 0.226], "rot": [0, 0, 0], "color": "#111111"},
+        {"name": "標籤", "shape": "box", "size": [0.26, 0.2, 0.01], "pos": [0, 0.46, 0.23], "rot": [0, 0, 0], "color": "#ffffff"},
+        {"name": "回收標誌", "shape": "torus", "radius": 0.055, "tube": 0.012, "arc": 300, "pos": [0, 0.46, 0.238], "rot": [0, 0, 0], "color": "#2e7d32"}
+      ]
+    },
+    {
+      "id": "trash_bin",
+      "label": "一般垃圾桶",
+      "cat": "small",
+      "color": "#6d6d6d",
+      "desc": "寬 45 公分、高 85 公分的戶外一般垃圾桶，和分類回收桶同尺寸",
+      "parts": [
+        {"name": "桶身", "shape": "box", "size": [0.45, 0.8, 0.45], "pos": [0, 0.4, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "桶蓋", "shape": "box", "size": [0.48, 0.05, 0.48], "pos": [0, 0.825, 0], "rot": [0, 0, 0], "color": "#3a3a3a"},
+        {"name": "投入口", "shape": "box", "size": [0.25, 0.04, 0.02], "pos": [0, 0.7, 0.226], "rot": [0, 0, 0], "color": "#111111"},
+        {"name": "標籤", "shape": "box", "size": [0.26, 0.2, 0.01], "pos": [0, 0.46, 0.23], "rot": [0, 0, 0], "color": "#d9d9d9"}
+      ]
+    },
+    {
+      "id": "pet_bottle",
+      "label": "寶特瓶",
+      "cat": "small",
+      "color": "#bfe6ff",
+      "desc": "高 22 公分的 600 毫升寶特瓶，可以拿在手上",
+      "hold": {"grip": [0, 0.1, 0], "rot": [0, 0, 0]},
+      "parts": [
+        {"name": "瓶身", "shape": "cylinder", "radius": 0.033, "height": 0.17, "pos": [0, 0.085, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "瓶肩", "shape": "cylinder", "radius": 0.033, "radiusTop": 0.014, "height": 0.035, "pos": [0, 0.1875, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "瓶蓋", "shape": "cylinder", "radius": 0.015, "height": 0.02, "pos": [0, 0.215, 0], "rot": [0, 0, 0], "color": "#1e88e5"},
+        {"name": "標籤", "shape": "cylinder", "radius": 0.034, "height": 0.06, "pos": [0, 0.09, 0], "rot": [0, 0, 0], "color": "#1e88e5"}
+      ]
+    }
+  ]
+}

@@ -1,0 +1,200 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>BlockingPRO 渲染檢查</title>
+<link rel="icon" href="data:,">
+<style>
+  body { margin: 0; background: #16181d; color: #ddd; font: 14px system-ui, sans-serif; padding: 12px; }
+  img { display: block; max-width: 100%; margin: 8px 0; }
+  #msg { white-space: pre-wrap; }
+  .err { color: #ff7b72; } .warn { color: #e3b341; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three/build/three.module.js",
+  "three/addons/": "./vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="msg"></div>
+<div id="out"></div>
+<script type="module">
+// Headless render page shared with tools/check_scene.py (the SKILL checker).
+// Script API on window.BP; or open render.html?project=examples/xxx.json to see the check sheets in a browser.
+import { Vector3 } from "three";
+import { normalize, validate, attachList, migrate } from "./runtime/schema.js";
+import { SceneRuntime } from "./runtime/scene.js";
+import { contactSheet, overviewMap, exportMp4, createProgramRenderer, renderProgramFrame } from "./runtime/export.js";
+import { readAssets, normalizeAsset, validateAsset, assetWarnings, assetBounds } from "./runtime/assets.js";
+import { parseModel } from "./runtime/models.js";
+import { findCollisions } from "./runtime/collide.js";
+import { shotSizeAt, axisCheck } from "./runtime/shotcheck.js";
+
+const rt = new SceneRuntime();
+const models = new Map(); // imported model files (p06): file name -> parsed model; missing ones show a placeholder box
+rt.modelSource = (name) => models.get(name) ?? null;
+const blobToBase64 = (blob) => new Promise((ok, bad) => { const r = new FileReader(); r.onload = () => ok(String(r.result).split(",")[1]); r.onerror = bad; r.readAsDataURL(blob); });
+const evenTimes = (n) => { const d = rt.project.settings.duration; return Array.from({ length: n }, (_, i) => Math.round(((d * (i + 0.5)) / n) * 100) / 100); };
+
+window.BP = {
+  /** Load a project object (older versions are upgraded first); returns { errors, warnings } from the shared validator plus notes and newer from migrate */
+  load(json) {
+    const { project, notes, newer } = migrate(json);
+    const p = normalize(project);
+    const v = validate(p);
+    if (!v.errors.length) rt.sync(p);
+    return { ...v, notes, newer };
+  },
+  info() {
+    const p = rt.project;
+    return { name: p.name, settings: p.settings, cameras: p.cameras.map((c) => [c.id, c.name]), cuts: p.cuts, actors: p.actors.length, props: p.props.length, lights: p.lights.length };
+  },
+  sheet({ times = null, count = 8, width = 480, cols = 4, camera = null } = {}) {
+    return contactSheet(rt, { times: times || evenTimes(count), width, cols, camera }).toDataURL("image/png");
+  },
+  overview(t = 0, size = 900) {
+    return overviewMap(rt, t, size).toDataURL("image/png");
+  },
+  frame(t, { width = rt.project.settings.width, height = rt.project.settings.height, camera = null } = {}) {
+    const pr = createProgramRenderer(width, height);
+    renderProgramFrame(rt, pr, t, camera);
+    const url = pr.canvas.toDataURL("image/png");
+    pr.dispose();
+    return url;
+  },
+  assetPreview,
+  /**
+   * The editor's checks on the loaded project: walk-throughs (k05), the shot size of each cut judged at its midpoint
+   * (on the aimed actor when in frame, else the biggest one), and actor pairs that swap left and right across a cut (k06).
+   */
+  analyze() {
+    const P = rt.project, D = P.settings.duration, sec = (t) => +t.toFixed(2);
+    const name = (id) => [...P.actors, ...P.props].find((x) => x.id === id)?.name || id;
+    const collisions = findCollisions(rt, P).map((c) =>
+      `${sec(c.t0)} 到 ${sec(c.t1)} 秒：${name(c.a)}${c.kind === "actor" ? "和" : "穿過"}${name(c.b)}${c.kind === "actor" ? "重疊" : ""}`);
+    const shots = P.cuts.map((c, i) => {
+      const end = P.cuts[i + 1]?.t ?? D, mid = (c.t + end) / 2;
+      rt.evaluate(mid);
+      const s = shotSizeAt(rt, c.camera, mid);
+      return { t0: c.t, t1: end, camera: c.camera, size: s.size, actor: s.actor ? name(s.actor) : null };
+    });
+    const axis = axisCheck(rt, (t) => rt.evaluate(t)).map((x) => x.text);
+    return { collisions, shots, axis };
+  },
+  /**
+   * Where everything is at time t, to join one part of a long story to the next (k02): actors with position, facing,
+   * head position and the clips in effect, props with position and who holds them, and the fields that must stay the
+   * same between parts (settings, names, body types, colours, custom asset definitions).
+   */
+  state(t) {
+    const P = rt.project, xyz = (v) => v.toArray().map((x) => +x.toFixed(3));
+    rt.evaluate(t);
+    // the clip in effect on a track: playing (or just ended at t), or ended earlier and holding its last pose
+    const clipsAt = (ent, track) => {
+      const c = track.filter((x) => x.start <= t).at(-1);
+      if (!c) return [];
+      if (t <= c.start + c.dur) return [c.type];
+      return rt._modeOf(ent)(c).hold ? [`${c.type}（停在最後姿勢）`] : [];
+    };
+    const actors = P.actors.map((a) => {
+      const ent = rt.entities.get(a.id), st = rt.actorState.get(a.id), j = ent.rig.joints;
+      const head = (j.head || j[ent.rig.jointNames[0]]).getWorldPosition(new Vector3());
+      return { id: a.id, name: a.name, kind: a.kind, preset: a.preset, color: a.color, scale: a.scale, body: a.body ?? null, display: a.display,
+        pos: xyz(st.pos), yaw: +st.yaw.toFixed(1), head: xyz(head), clips: [...clipsAt(ent, a.actions), ...clipsAt(ent, a.upper)] };
+    });
+    // the attach segment in effect, with the grip resolved as runtime/attach.js does (default joint, upright)
+    const props = P.props.map((o) => {
+      const ent = rt.entities.get(o.id), s = attachList(o).find((x) => t >= (x.from ?? -Infinity) && t < (x.to ?? Infinity));
+      const r = s && rt.entities.get(s.actor)?.rig;
+      return { id: o.id, name: o.name, type: o.type, color: o.color, scale: o.scale, pos: xyz(ent.object.position),
+        holder: s ? { actor: s.actor, joint: s.joint || (r?.joints.rHand && ent.def?.hold ? "rHand" : r?.jointNames[0]),
+          upright: !!(s.upright ?? ent.def?.hold?.upright), pos: s.pos ?? null, rot: s.rot ?? null } : null };
+    });
+    return { name: P.name, settings: P.settings, actors, props, assets: Object.fromEntries(P.assets.map((x) => [x.id, x])) };
+  },
+  /** Model files of imported model props, { "car.glb": base64 }; call before load. Returns the ones that failed. */
+  async loadModels(files) {
+    const failed = [];
+    for (const [name, b64] of Object.entries(files)) {
+      try {
+        const buf = await (await fetch(`data:application/octet-stream;base64,${b64}`)).arrayBuffer();
+        models.set(name, await parseModel(name, buf));
+      } catch (e) {
+        failed.push(`${name}：${e?.message || e}`);
+      }
+    }
+    return failed;
+  },
+  async mp4({ width, height, fps, camera = null } = {}) {
+    const S = rt.project.settings;
+    const res = await exportMp4(rt, { width: width || S.width, height: height || S.height, fps: fps || S.fps, start: 0, end: S.duration, camera });
+    return { base64: await blobToBase64(res.blob), codec: res.codec, frames: res.frames, width: res.width, height: res.height };
+  },
+};
+
+/**
+ * Preview scene for an asset pack: the assets in a row on the floor next to a 1.7 m person,
+ * seen from the front, front three-quarter and back three-quarter (one second each), so one sheet shows every side.
+ * Returns { errors, warnings, project } (project is null when no asset is usable).
+ */
+function assetPreview(data) {
+  const r = readAssets(data);
+  const errors = r.error ? [r.error] : [], warnings = [], assets = [];
+  r.assets.forEach((raw, i) => {
+    const a = normalizeAsset(raw), tag = `物品 ${i + 1}（${a?.label || a?.id || raw?.id || "未命名"}）`;
+    const errs = a ? validateAsset(a) : ["不是物品物件"];
+    if (errs.length) { errors.push(...errs.map((e) => `${tag}：${e}`)); return; }
+    warnings.push(...assetWarnings(a).map((w) => `${tag}：${w}`));
+    assets.push(a);
+  });
+  if (!assets.length) return { errors: errors.length ? errors : ["沒有可以預覽的物品"], warnings, project: null };
+  const props = [];
+  let x = 0, top = 1.7, depth = 1;
+  for (const a of assets) {
+    const b = assetBounds(a), w = b ? b.max.x - b.min.x : 0.5;
+    x += w / 2;
+    props.push({ id: `p_${a.id}`, type: a.id, path: { keys: [{ t: 0, v: [x - (b ? (b.min.x + b.max.x) / 2 : 0), 0, 0] }] } });
+    x += w / 2 + 0.4;
+    if (b) { top = Math.max(top, b.max.y); depth = Math.max(depth, b.max.z - b.min.z); }
+  }
+  const left = -1.1, width = x - 0.4 - left, cx = left + width / 2, cy = top * 0.45;
+  const dist = Math.max(3, width * 1.3, top * 2.2, depth * 1.5);
+  const cam = (id, name, px, pz) => ({ id, name, path: { keys: [{ t: 0, v: [cx + px * dist, Math.max(1.2, top * 0.7), pz * dist] }] }, aim: { mode: "point", keys: [{ t: 0, v: [cx, cy, 0] }] }, lens: 35 });
+  const project = {
+    format: "blockingpro", version: 1, name: "物品預覽",
+    settings: { width: 1280, height: 720, fps: 30, duration: 3, lighting: "studio" },
+    actors: [{ id: "ref", name: "參考人（1.7 公尺）", kind: "human", preset: "man", facing: "fixed", yaw: 0, path: { keys: [{ t: 0, v: [-0.8, 0, 0] }] } }],
+    props, lights: [], assets,
+    cameras: [cam("front", "正面", 0, 1), cam("three", "右前 45 度", 0.72, 0.72), cam("back", "左後 45 度", -0.72, -0.72)],
+    cuts: [{ t: 0, camera: "front" }, { t: 1, camera: "three" }, { t: 2, camera: "back" }],
+  };
+  return { errors, warnings, project };
+}
+
+async function viewFromQuery() {
+  const src = new URLSearchParams(location.search).get("project");
+  if (!src) return;
+  const json = await (await fetch(src)).json();
+  // model files sit next to the project file
+  for (const name of new Set((json.assets || []).map((a) => a?.model?.file).filter(Boolean))) {
+    const res = await fetch(new URL(name, new URL(src, location.href)));
+    if (res.ok) models.set(name, await parseModel(name, await res.arrayBuffer()));
+  }
+  const v = window.BP.load(json);
+  const msg = document.getElementById("msg");
+  msg.innerHTML = [...v.errors.map((e) => `<div class="err">錯誤：${e}</div>`), ...v.warnings.map((w) => `<div class="warn">提醒：${w}</div>`)].join("") || "格式檢查通過";
+  if (v.errors.length) return;
+  const out = document.getElementById("out");
+  for (const url of [window.BP.overview(0), window.BP.sheet({ count: 8 })]) {
+    const img = new Image();
+    img.src = url;
+    out.appendChild(img);
+  }
+}
+
+viewFromQuery().then(() => { window.__ready = true; }, (e) => { window.__error = String(e?.stack || e); document.getElementById("msg").textContent = window.__error; window.__ready = true; });
+</script>
+</body>
+</html>

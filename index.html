@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>BlockingPRO</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="css/app.css">
+<script type="importmap">
+{ "imports": {
+  "three": "./vendor/three/build/three.module.js",
+  "three/addons/": "./vendor/three/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="app">
+  <header id="topbar"></header>
+  <div id="main">
+    <section id="library" class="panel" data-size="--left"></section>
+    <div class="splitter" id="splitL"></div>
+    <div id="center">
+      <div id="stage">
+        <div id="view" class="view"></div>
+        <div class="splitter" id="splitM"></div>
+        <div id="monitor" data-size="--mon"></div>
+      </div>
+      <div class="splitter h" id="splitT"></div>
+      <section id="timeline" data-size="--tl"></section>
+    </div>
+    <div class="splitter" id="splitR"></div>
+    <section id="right" class="panel" data-size="--right"><h3>屬性</h3><div id="insp" class="scroll"></div></section>
+  </div>
+  <footer id="statusbar"></footer>
+</div>
+<div id="boot" class="modal-back"><div class="modal"><h2>BlockingPRO 載入中…</h2><p class="note" id="bootMsg">正在載入 three.js（vendor 資料夾）。</p></div></div>
+<script>
+  // module scripts fail silently when a file is missing or the page is opened as file://: tell the user instead of showing a blank page
+  setTimeout(function () {
+    var m = document.getElementById("bootMsg");
+    if (m) m.innerHTML = "<span class='err'>載入失敗或太慢。請用 start.bat 啟動（不要直接雙擊 index.html），並確認 vendor 資料夾完整。按 F12 的 Console 可看錯誤細節。</span>";
+  }, 12000);
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>

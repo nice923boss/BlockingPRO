@@ -1,0 +1,66 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "借傘 第 2 場 客廳",
+  "settings": {
+    "width": 1280, "height": 720, "fps": 30, "duration": 6.2, "lighting": "indoor",
+    "markers": [
+      {"t": 0.0, "label": "阿哲坐在沙發上，看著桌上的傘。"},
+      {"t": 3.6, "label": "阿哲：自言自語"}
+    ]
+  },
+  "actors": [
+    {
+      "id": "actor2", "name": "阿哲", "kind": "human", "preset": "man", "color": "#3d5a80",
+      "facing": "fixed", "yaw": 0,
+      "path": { "keys": [ {"t": 0, "v": [0.3, 0, 0.4]} ] },
+      "actions": [
+        {"type": "sitting", "start": 0, "dur": 6.2, "params": {"seat": 0.42}, "blend": 0}
+      ],
+      "upper": [
+        {"type": "talk", "start": 3.6, "dur": 1.75}
+      ],
+      "gaze": [
+        {"start": 0, "dur": 6.2, "point": [0.0, 0.48, 1.35]}
+      ]
+    }
+  ],
+  "props": [
+    {"id": "wall", "type": "wall", "name": "客廳牆", "color": "#a39b8e", "path": {"keys": [{"t": 0, "v": [0, 0, -0.6]}]}},
+    {"id": "sofa", "type": "sofa", "path": {"keys": [{"t": 0, "v": [0, 0, 0]}]}},
+    {"id": "shelf", "type": "bookshelf", "path": {"keys": [{"t": 0, "v": [1.6, 0, -0.35]}]}},
+    {"id": "coffee", "type": "table", "name": "茶几", "scale": [0.8, 0.6, 0.7], "path": {"keys": [{"t": 0, "v": [0.1, 0, 1.35]}]}},
+    {"id": "umbrella", "type": "folding_umbrella", "name": "折疊傘", "yaw": 30,
+     "path": {"keys": [{"t": 0, "v": [0.0, 0.45, 1.35]}]}}
+  ],
+  "lights": [],
+  "cameras": [
+    {"id": "camA", "name": "A 機 客廳全景", "path": {"keys": [{"t": 0, "v": [2.6, 1.5, 3.6]}]},
+     "aim": {"mode": "point", "keys": [{"t": 0, "v": [0.2, 0.75, 0.6]}]}, "lens": 28},
+    {"id": "camB", "name": "B 機 過肩看傘", "path": {"keys": [{"t": 0, "v": [0.65, 1.4, -0.15]}]},
+     "aim": {"mode": "point", "keys": [{"t": 0, "v": [0.0, 0.48, 1.35]}]}, "lens": 40},
+    {"id": "camC", "name": "C 機 阿哲中近景", "path": {"keys": [{"t": 0, "v": [1.3, 1.1, 2.2]}]},
+     "aim": {"mode": "point", "keys": [{"t": 0, "v": [0.3, 1.12, 0.25]}]}, "lens": 55}
+  ],
+  "cuts": [
+    {"t": 0, "camera": "camA", "note": "全景：夜裡的客廳，阿哲一個人坐在沙發上，看著茶几上的折疊傘"},
+    {"t": 2.2, "camera": "camB", "note": "過肩：從阿哲肩後看茶几上那把紅色折疊傘"},
+    {"t": 3.4, "camera": "camC", "note": "中近景：阿哲盯著傘自言自語「明天要怎麼還她？」"}
+  ],
+  "subtitles": [
+    {"t": 3.6, "dur": 1.75, "text": "明天要怎麼還她？", "actor": "actor2"}
+  ],
+  "assets": [
+    {
+      "id": "folding_umbrella", "label": "折疊傘", "cat": "small", "color": "#c0392b",
+      "desc": "收起來的折疊傘，平放時長 0.31 公尺，握把在 -Z",
+      "hold": {"grip": [0, 0.03, -0.12], "rot": [0, 0, 0]},
+      "parts": [
+        {"name": "傘面", "shape": "cylinder", "radius": 0.03, "height": 0.2, "pos": [0, 0.03, 0.02], "rot": [90, 0, 0]},
+        {"name": "束帶", "shape": "torus", "radius": 0.031, "tube": 0.005, "pos": [0, 0.03, 0.05], "color": "#2a2a2a"},
+        {"name": "握把", "shape": "cylinder", "radius": 0.016, "height": 0.08, "pos": [0, 0.03, -0.12], "rot": [90, 0, 0], "color": "#2a2a2a"},
+        {"name": "傘尖", "shape": "cylinder", "radius": 0.006, "height": 0.03, "pos": [0, 0.03, 0.135], "rot": [90, 0, 0], "color": "#2a2a2a"}
+      ]
+    }
+  ]
+}

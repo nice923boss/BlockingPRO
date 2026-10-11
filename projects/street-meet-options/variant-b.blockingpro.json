@@ -1,0 +1,39 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "街頭相遇（方案 B：跟拍加推近）",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 8, "lighting": "sunset" },
+  "actors": [
+    {
+      "id": "man", "name": "阿哲", "kind": "human", "preset": "man", "color": "#3d5a80",
+      "path": { "keys": [ { "t": 0, "v": [-5, 0, 0] }, { "t": 4, "v": [-0.8, 0, 0], "e": "out" } ] },
+      "upper": [ { "type": "wave", "start": 4.2, "dur": 2 } ]
+    },
+    {
+      "id": "woman", "name": "小雯", "kind": "human", "preset": "woman", "color": "#e07a5f",
+      "path": { "keys": [ { "t": 0, "v": [5, 0, 0.3] }, { "t": 4.5, "v": [0.8, 0, 0.3], "e": "out" } ] },
+      "upper": [ { "type": "talk", "start": 5.5, "dur": 2.5 } ]
+    }
+  ],
+  "props": [
+    { "id": "lamp", "type": "streetlight", "path": { "keys": [ { "t": 0, "v": [0, 0, -2.6] } ] } },
+    { "id": "bench", "type": "bench", "path": { "keys": [ { "t": 0, "v": [2.6, 0, -2.3] } ] } },
+    { "id": "tree", "type": "tree", "path": { "keys": [ { "t": 0, "v": [-3.2, 0, -3] } ] } },
+    { "id": "house", "type": "building", "path": { "keys": [ { "t": 0, "v": [0, 0, -9] } ] } }
+  ],
+  "lights": [],
+  "cameras": [
+    { "id": "camT1", "name": "T1 機 跟拍阿哲", "mount": { "actor": "man", "offset": [-3.5, 1.4, 0], "rotate": true },
+      "aim": { "mode": "actor", "actor": "man" }, "lens": 35 },
+    { "id": "camT2", "name": "T2 機 跟拍小雯", "mount": { "actor": "woman", "offset": [3.5, 1.4, 0], "rotate": true },
+      "aim": { "mode": "actor", "actor": "woman" }, "lens": 35 },
+    { "id": "camP", "name": "P 機 推近雙人", "path": { "keys": [ { "t": 4.5, "v": [0, 1.5, 5], "e": "inOut" }, { "t": 8, "v": [0.3, 1.5, 2.4] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 0, "v": [0, 1.35, 0.15] } ] }, "lens": 32 }
+  ],
+  "cuts": [
+    { "t": 0, "camera": "camT1", "note": "側面跟拍：阿哲往右走" },
+    { "t": 2.5, "camera": "camT2", "note": "側面跟拍：小雯往左走" },
+    { "t": 4.5, "camera": "camP", "note": "推近：兩人在路燈下打招呼、聊天" }
+  ],
+  "assets": []
+}

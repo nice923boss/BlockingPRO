@@ -1,0 +1,382 @@
+{
+ "format": "blockingpro-library",
+ "version": 1,
+ "assets": [
+  {
+   "id": "recycle_bin",
+   "label": "分類回收桶",
+   "cat": "small",
+   "color": "#2e7d32",
+   "desc": "寬 45 公分、高 85 公分的戶外資源回收桶，正面有投入口與回收標誌",
+   "parts": [
+    {
+     "shape": "box",
+     "name": "桶身",
+     "size": [
+      0.45,
+      0.8,
+      0.45
+     ],
+     "pos": [
+      0,
+      0.4,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": null
+    },
+    {
+     "shape": "box",
+     "name": "桶蓋",
+     "size": [
+      0.48,
+      0.05,
+      0.48
+     ],
+     "pos": [
+      0,
+      0.825,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#1b5e20"
+    },
+    {
+     "shape": "box",
+     "name": "投入口",
+     "size": [
+      0.25,
+      0.04,
+      0.02
+     ],
+     "pos": [
+      0,
+      0.7,
+      0.226
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#111111"
+    },
+    {
+     "shape": "box",
+     "name": "標籤",
+     "size": [
+      0.26,
+      0.2,
+      0.01
+     ],
+     "pos": [
+      0,
+      0.46,
+      0.23
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#ffffff"
+    },
+    {
+     "shape": "torus",
+     "name": "回收標誌",
+     "radius": 0.055,
+     "tube": 0.012,
+     "arc": 300,
+     "pos": [
+      0,
+      0.46,
+      0.238
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#2e7d32"
+    }
+   ]
+  },
+  {
+   "id": "trash_bin",
+   "label": "一般垃圾桶",
+   "cat": "small",
+   "color": "#6d6d6d",
+   "desc": "寬 45 公分、高 85 公分的戶外一般垃圾桶，和分類回收桶同尺寸",
+   "parts": [
+    {
+     "shape": "box",
+     "name": "桶身",
+     "size": [
+      0.45,
+      0.8,
+      0.45
+     ],
+     "pos": [
+      0,
+      0.4,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": null
+    },
+    {
+     "shape": "box",
+     "name": "桶蓋",
+     "size": [
+      0.48,
+      0.05,
+      0.48
+     ],
+     "pos": [
+      0,
+      0.825,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#3a3a3a"
+    },
+    {
+     "shape": "box",
+     "name": "投入口",
+     "size": [
+      0.25,
+      0.04,
+      0.02
+     ],
+     "pos": [
+      0,
+      0.7,
+      0.226
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#111111"
+    },
+    {
+     "shape": "box",
+     "name": "標籤",
+     "size": [
+      0.26,
+      0.2,
+      0.01
+     ],
+     "pos": [
+      0,
+      0.46,
+      0.23
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#d9d9d9"
+    }
+   ]
+  },
+  {
+   "id": "pet_bottle",
+   "label": "寶特瓶",
+   "cat": "small",
+   "color": "#bfe6ff",
+   "desc": "高 22 公分的 600 毫升寶特瓶，可以拿在手上",
+   "hold": {
+    "grip": [
+     0,
+     0.1,
+     0
+    ],
+    "rot": [
+     0,
+     0,
+     0
+    ]
+   },
+   "parts": [
+    {
+     "shape": "cylinder",
+     "name": "瓶身",
+     "radius": 0.033,
+     "height": 0.17,
+     "pos": [
+      0,
+      0.085,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": null
+    },
+    {
+     "shape": "cylinder",
+     "name": "瓶肩",
+     "radius": 0.033,
+     "height": 0.035,
+     "radiusTop": 0.014,
+     "pos": [
+      0,
+      0.1875,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": null
+    },
+    {
+     "shape": "cylinder",
+     "name": "瓶蓋",
+     "radius": 0.015,
+     "height": 0.02,
+     "pos": [
+      0,
+      0.215,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#1e88e5"
+    },
+    {
+     "shape": "cylinder",
+     "name": "標籤",
+     "radius": 0.034,
+     "height": 0.06,
+     "pos": [
+      0,
+      0.09,
+      0
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#1e88e5"
+    }
+   ]
+  },
+  {
+   "id": "folding_umbrella",
+   "label": "折疊傘",
+   "cat": "small",
+   "color": "#c0392b",
+   "desc": "收起來的折疊傘，平放時長 0.31 公尺，握把在 -Z",
+   "hold": {
+    "grip": [
+     0,
+     0.03,
+     -0.12
+    ],
+    "rot": [
+     0,
+     0,
+     0
+    ]
+   },
+   "parts": [
+    {
+     "shape": "cylinder",
+     "name": "傘面",
+     "radius": 0.03,
+     "height": 0.2,
+     "pos": [
+      0,
+      0.03,
+      0.02
+     ],
+     "rot": [
+      90,
+      0,
+      0
+     ],
+     "color": null
+    },
+    {
+     "shape": "torus",
+     "name": "束帶",
+     "radius": 0.031,
+     "tube": 0.005,
+     "arc": 360,
+     "pos": [
+      0,
+      0.03,
+      0.05
+     ],
+     "rot": [
+      0,
+      0,
+      0
+     ],
+     "color": "#2a2a2a"
+    },
+    {
+     "shape": "cylinder",
+     "name": "握把",
+     "radius": 0.016,
+     "height": 0.08,
+     "pos": [
+      0,
+      0.03,
+      -0.12
+     ],
+     "rot": [
+      90,
+      0,
+      0
+     ],
+     "color": "#2a2a2a"
+    },
+    {
+     "shape": "cylinder",
+     "name": "傘尖",
+     "radius": 0.006,
+     "height": 0.03,
+     "pos": [
+      0,
+      0.03,
+      0.135
+     ],
+     "rot": [
+      90,
+      0,
+      0
+     ],
+     "color": "#2a2a2a"
+    }
+   ]
+  }
+ ]
+}

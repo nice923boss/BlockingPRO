@@ -1,0 +1,39 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "街頭相遇（方案 A：古典正反打）",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 8, "lighting": "sunset" },
+  "actors": [
+    {
+      "id": "man", "name": "阿哲", "kind": "human", "preset": "man", "color": "#3d5a80",
+      "path": { "keys": [ { "t": 0, "v": [-5, 0, 0] }, { "t": 4, "v": [-0.8, 0, 0], "e": "out" } ] },
+      "upper": [ { "type": "wave", "start": 4.2, "dur": 2 } ]
+    },
+    {
+      "id": "woman", "name": "小雯", "kind": "human", "preset": "woman", "color": "#e07a5f",
+      "path": { "keys": [ { "t": 0, "v": [5, 0, 0.3] }, { "t": 4.5, "v": [0.8, 0, 0.3], "e": "out" } ] },
+      "upper": [ { "type": "talk", "start": 5.5, "dur": 2.5 } ]
+    }
+  ],
+  "props": [
+    { "id": "lamp", "type": "streetlight", "path": { "keys": [ { "t": 0, "v": [0, 0, -2.6] } ] } },
+    { "id": "bench", "type": "bench", "path": { "keys": [ { "t": 0, "v": [2.6, 0, -2.3] } ] } },
+    { "id": "tree", "type": "tree", "path": { "keys": [ { "t": 0, "v": [-3.2, 0, -3] } ] } },
+    { "id": "house", "type": "building", "path": { "keys": [ { "t": 0, "v": [0, 0, -9] } ] } }
+  ],
+  "lights": [],
+  "cameras": [
+    { "id": "camA", "name": "A 機 全景", "path": { "keys": [ { "t": 0, "v": [0, 1.6, 8] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 0, "v": [0, 1.1, 0] } ] }, "lens": 28 },
+    { "id": "camB", "name": "B 機 過肩拍阿哲", "path": { "keys": [ { "t": 0, "v": [2, 1.55, 0.85] } ] },
+      "aim": { "mode": "actor", "actor": "man", "offset": [0, 1.64, 0] }, "lens": 45 },
+    { "id": "camC", "name": "C 機 過肩拍小雯", "path": { "keys": [ { "t": 0, "v": [-2, 1.6, 0.75] } ] },
+      "aim": { "mode": "actor", "actor": "woman", "offset": [0, 1.52, 0] }, "lens": 45 }
+  ],
+  "cuts": [
+    { "t": 0, "camera": "camA", "note": "全景：阿哲從左、小雯從右走向路燈下" },
+    { "t": 4.2, "camera": "camB", "note": "過肩：越過小雯的肩膀看阿哲揮手" },
+    { "t": 6, "camera": "camC", "note": "過肩：越過阿哲的肩膀看小雯說話" }
+  ],
+  "assets": []
+}

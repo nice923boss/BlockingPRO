@@ -1,0 +1,37 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "咖啡廳對話",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 8, "lighting": "indoor" },
+  "actors": [
+    {
+      "id": "man", "name": "阿哲", "kind": "human", "preset": "man", "facing": "fixed", "yaw": 0,
+      "path": { "keys": [ { "t": 0, "v": [0, 0, -0.55] } ] },
+      "actions": [ { "type": "sitting", "start": 0, "dur": 8 } ],
+      "upper": [ { "type": "talk", "start": 0.5, "dur": 3.5 }, { "type": "drink", "start": 5, "dur": 3 } ]
+    },
+    {
+      "id": "woman", "name": "小雯", "kind": "human", "preset": "woman", "facing": "fixed", "yaw": 180,
+      "path": { "keys": [ { "t": 0, "v": [0, 0, 0.55] } ] },
+      "actions": [ { "type": "sitting", "start": 0, "dur": 8 } ],
+      "upper": [ { "type": "think", "start": 1, "dur": 3 }, { "type": "talk", "start": 4.2, "dur": 3.8 } ]
+    }
+  ],
+  "props": [
+    { "id": "table", "type": "table", "path": { "keys": [ { "t": 0, "v": [0, 0, 0] } ] } },
+    { "id": "chairM", "type": "chair", "yaw": 0, "path": { "keys": [ { "t": 0, "v": [0, 0, -0.98] } ] } },
+    { "id": "chairW", "type": "chair", "yaw": 180, "path": { "keys": [ { "t": 0, "v": [0, 0, 0.95] } ] } },
+    { "id": "cup", "type": "cup", "attach": { "actor": "man", "joint": "rHand", "from": 5 }, "path": { "keys": [ { "t": 0, "v": [0.25, 0.75, -0.15] } ] } },
+    { "id": "wall", "type": "wall", "yaw": 90, "path": { "keys": [ { "t": 0, "v": [-2.2, 0, 0] } ] } },
+    { "id": "shelf", "type": "bookshelf", "yaw": 90, "path": { "keys": [ { "t": 0, "v": [-2, 0, -1.6] } ] } }
+  ],
+  "lights": [
+    { "id": "key", "type": "spot", "name": "桌上方吊燈", "intensity": 40, "angle": 40, "path": { "keys": [ { "t": 0, "v": [0, 2.8, 0] } ] }, "aim": [0, 0.7, 0] }
+  ],
+  "cameras": [
+    { "id": "camA", "name": "A 機 側面雙人", "path": { "keys": [ { "t": 0, "v": [3.4, 1.4, 0] } ] }, "aim": { "mode": "point", "keys": [ { "t": 0, "v": [0, 0.95, 0] } ] }, "lens": 35 },
+    { "id": "camB", "name": "B 機 過肩拍小雯", "path": { "keys": [ { "t": 0, "v": [0.6, 1.4, -2.7] } ] }, "aim": { "mode": "actor", "actor": "woman" }, "lens": 45 },
+    { "id": "camC", "name": "C 機 過肩拍阿哲", "path": { "keys": [ { "t": 0, "v": [0.6, 1.35, 2.7] } ] }, "aim": { "mode": "actor", "actor": "man" }, "lens": 45 }
+  ],
+  "cuts": [ { "t": 0, "camera": "camA" }, { "t": 1.5, "camera": "camC" }, { "t": 4.2, "camera": "camB" }, { "t": 6.5, "camera": "camA" } ]
+}

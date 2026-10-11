@@ -1,0 +1,44 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "公園還書（第 1 段，共 2 段）",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 12, "lighting": "day" },
+  "actors": [
+    {
+      "id": "wen", "name": "小雯", "kind": "human", "preset": "woman", "color": "#e07a5f",
+      "path": { "keys": [ { "t": 0, "v": [-5, 0, 2] }, { "t": 4, "v": [-0.4, 0, 0.4], "yaw": 0 } ] },
+      "actions": [ { "type": "sit", "start": 4.2, "dur": 1.5 }, { "type": "sitting", "start": 5.7, "dur": 6.3 } ]
+    },
+    {
+      "id": "kai", "name": "阿凱", "kind": "human", "preset": "man", "color": "#3d5a80",
+      "path": { "keys": [ { "t": 0, "v": [8, 0, 3] }, { "t": 4.5, "v": [8, 0, 3] }, { "t": 10.5, "v": [-0.4, 0, 1.24], "yaw": 180 } ] },
+      "upper": [ { "type": "wave", "start": 10.6, "dur": 1 } ]
+    }
+  ],
+  "props": [
+    { "id": "bench", "type": "bench", "path": { "keys": [ { "t": 0, "v": [0, 0, 0] } ] } },
+    { "id": "book", "name": "借來的書", "type": "book", "path": { "keys": [ { "t": 0, "v": [-5, 0, 2] } ] },
+      "attach": { "actor": "wen", "upright": true } },
+    { "id": "tree1", "type": "tree", "path": { "keys": [ { "t": 0, "v": [-3, 0, -2.5] } ] } },
+    { "id": "tree2", "type": "tree", "path": { "keys": [ { "t": 0, "v": [3.5, 0, -3] } ] } },
+    { "id": "bush", "type": "bush", "path": { "keys": [ { "t": 0, "v": [1.6, 0, -0.6] } ] } }
+  ],
+  "lights": [],
+  "cameras": [
+    { "id": "camA", "name": "A 機 全景", "path": { "keys": [ { "t": 0, "v": [0, 1.7, 8] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 0, "v": [0, 0.9, 0.8] } ] }, "lens": 24 },
+    { "id": "camB", "name": "B 機 小雯坐下", "path": { "keys": [ { "t": 0, "v": [2, 1.15, 2.4] } ] },
+      "aim": { "mode": "actor", "actor": "wen", "offset": [0, 1, 0] }, "lens": 40 },
+    { "id": "camC", "name": "C 機 阿凱走近", "path": { "keys": [ { "t": 0, "v": [1.2, 1.55, 5.5] } ] },
+      "aim": { "mode": "actor", "actor": "kai" }, "lens": 35 },
+    { "id": "camD", "name": "D 機 雙人", "path": { "keys": [ { "t": 0, "v": [3.4, 1.4, 0.9] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 0, "v": [-0.4, 1.2, 0.8] } ] }, "lens": 30 }
+  ],
+  "cuts": [
+    { "t": 0, "camera": "camA", "note": "全景：小雯拿著書走進公園，走向長椅" },
+    { "t": 4, "camera": "camB", "note": "中遠景：小雯在長椅坐下" },
+    { "t": 7.5, "camera": "camC", "note": "中遠景：阿凱從右邊走向長椅" },
+    { "t": 10.3, "camera": "camD", "note": "雙人全景：阿凱停在小雯面前揮手" }
+  ],
+  "assets": []
+}

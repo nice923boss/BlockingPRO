@@ -1,0 +1,31 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "街頭相遇",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 8, "lighting": "sunset" },
+  "actors": [
+    {
+      "id": "man", "name": "阿哲", "kind": "human", "preset": "man",
+      "path": { "keys": [ { "t": 0, "v": [-5, 0, 0] }, { "t": 4, "v": [-0.8, 0, 0], "e": "out" } ] },
+      "upper": [ { "type": "wave", "start": 4.2, "dur": 2 } ]
+    },
+    {
+      "id": "woman", "name": "小雯", "kind": "human", "preset": "woman",
+      "path": { "keys": [ { "t": 0, "v": [5, 0, 0.3] }, { "t": 4.5, "v": [0.8, 0, 0.3], "e": "out" } ] },
+      "upper": [ { "type": "talk", "start": 5.5, "dur": 2.5 } ]
+    }
+  ],
+  "props": [
+    { "id": "lamp", "type": "streetlight", "path": { "keys": [ { "t": 0, "v": [0, 0, -2.6] } ] } },
+    { "id": "bench", "type": "bench", "path": { "keys": [ { "t": 0, "v": [2.6, 0, -2.3] } ] } },
+    { "id": "tree", "type": "tree", "path": { "keys": [ { "t": 0, "v": [-3.2, 0, -3] } ] } },
+    { "id": "house", "type": "building", "path": { "keys": [ { "t": 0, "v": [0, 0, -9] } ] } }
+  ],
+  "lights": [],
+  "cameras": [
+    { "id": "camA", "name": "A 機 全景", "path": { "keys": [ { "t": 0, "v": [0, 1.6, 8] } ] }, "aim": { "mode": "point", "keys": [ { "t": 0, "v": [0, 1.1, 0] } ] }, "lens": 28 },
+    { "id": "camB", "name": "B 機 過肩拍阿哲", "path": { "keys": [ { "t": 0, "v": [2.4, 1.55, 1.5] } ] }, "aim": { "mode": "actor", "actor": "man" }, "lens": 50 },
+    { "id": "camC", "name": "C 機 過肩拍小雯", "path": { "keys": [ { "t": 0, "v": [-2.4, 1.6, 1.3] } ] }, "aim": { "mode": "actor", "actor": "woman" }, "lens": 50 }
+  ],
+  "cuts": [ { "t": 0, "camera": "camA" }, { "t": 4.2, "camera": "camB" }, { "t": 6, "camera": "camC" } ]
+}

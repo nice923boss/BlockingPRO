@@ -1,0 +1,12 @@
+*_check/
+spikes/out/
+library/assets.bak.json
+__pycache__/
+library/poses.bak.json
+.claude/
+*.exe
+# development records and spikes are kept locally only
+PLAN.md
+docs/
+spikes/*
+!spikes/a03-daily.blockingpro.json

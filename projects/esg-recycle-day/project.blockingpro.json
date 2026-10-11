@@ -1,0 +1,142 @@
+{
+  "format": "blockingpro",
+  "version": 1,
+  "name": "社區回收日",
+  "settings": { "width": 1280, "height": 720, "fps": 30, "duration": 15, "lighting": "day" },
+  "actors": [
+    {
+      "id": "ann", "name": "小安", "kind": "human", "preset": "child", "color": "#f4a261",
+      "path": { "curve": "linear", "keys": [
+        { "t": 0, "v": [-4.6, 0, 1.0] },
+        { "t": 2.6, "v": [-1.45, 0, 1.0], "yaw": 90 },
+        { "t": 5.1, "v": [-1.45, 0, 1.0], "yaw": 90 },
+        { "t": 7.4, "v": [0, 0, -0.6], "yaw": 180 },
+        { "t": 8.4, "v": [0, 0, -0.6], "yaw": 180 },
+        { "t": 9.4, "v": [-0.9, 0, -0.7] },
+        { "t": 10.4, "v": [-0.9, 0, -0.7], "yaw": -100 },
+        { "t": 11.0, "v": [-0.9, 0, -0.7], "yaw": 90 }
+      ] },
+      "actions": [
+        { "type": "pickUp", "start": 2.7, "dur": 2.4 },
+        { "type": "cheer", "start": 12.9, "dur": 2 }
+      ],
+      "upper": [
+        { "type": "pose", "start": 7.4, "dur": 0.9,
+          "pose": { "rot": { "rUpperArm": [-80, 0, 0], "rForeArm": [-15, 0, 0], "spine": [6, 0, 0] } } }
+      ]
+    },
+    {
+      "id": "grandma", "name": "阿嬤", "kind": "human", "preset": "elder", "color": "#9b5de5",
+      "path": { "curve": "linear", "keys": [
+        { "t": 0, "v": [-2.52, 0, -1.12], "yaw": 45 },
+        { "t": 11.8, "v": [-2.52, 0, -1.12], "yaw": 45 },
+        { "t": 13.6, "v": [-1.5, 0, 0.0], "yaw": 121 }
+      ] },
+      "actions": [
+        { "type": "sitting", "start": 0, "dur": 10.2, "params": { "seat": 0.45 }, "blend": 0 },
+        { "type": "standUp", "start": 10.2, "dur": 1.6, "params": { "seat": 0.45 } }
+      ],
+      "upper": [
+        { "type": "clap", "start": 8.5, "dur": 1.8 },
+        { "type": "clap", "start": 13.7, "dur": 1.3 }
+      ]
+    },
+    {
+      "id": "zhe", "name": "阿哲", "kind": "human", "preset": "man", "color": "#3d5a80",
+      "path": { "curve": "linear", "keys": [
+        { "t": 3.6, "v": [7.5, 0, 1.4] },
+        { "t": 8.4, "v": [1.6, 0, -0.6], "yaw": 180 },
+        { "t": 10.8, "v": [1.6, 0, -0.6], "yaw": 180 },
+        { "t": 11.9, "v": [0, 0, -0.6], "yaw": 180 },
+        { "t": 12.8, "v": [0, 0, -0.6], "yaw": 180 },
+        { "t": 13.5, "v": [0, 0, -0.6], "yaw": -85 }
+      ] },
+      "upper": [
+        { "type": "pose", "start": 9.0, "dur": 0.9,
+          "pose": { "rot": { "rUpperArm": [-60, 0, -5], "rForeArm": [-30, 0, 0] } } },
+        { "type": "pose", "start": 9.9, "dur": 0.9,
+          "pose": { "rot": { "rUpperArm": [-60, 0, -5], "rForeArm": [-30, 0, 0], "neck": [0, 15, 0], "head": [0, 30, 0] } } },
+        { "type": "pose", "start": 12.0, "dur": 0.8,
+          "pose": { "rot": { "rUpperArm": [-80, 0, 0], "rForeArm": [-15, 0, 0], "spine": [6, 0, 0] } } },
+        { "type": "talk", "start": 13.6, "dur": 1.4, "params": { "energy": 0.7 } }
+      ]
+    }
+  ],
+  "props": [
+    { "id": "recycle", "type": "recycle_bin", "name": "分類回收桶", "path": { "keys": [ { "t": 0, "v": [0, 0, -1.2] } ] } },
+    { "id": "trash", "type": "trash_bin", "name": "一般垃圾桶", "path": { "keys": [ { "t": 0, "v": [1.6, 0, -1.2] } ] } },
+    { "id": "bottle1", "type": "pet_bottle", "name": "地上的寶特瓶",
+      "path": { "keys": [ { "t": 0, "v": [-1.1, 0, 1.0] }, { "t": 3.8, "v": [-1.1, 0, 1.0], "e": "hold" }, { "t": 8.3, "v": [0, 0.5, -1.2] } ] },
+      "attach": { "actor": "ann", "joint": "rHand", "from": 3.8, "to": 7.9, "blend": 0.3, "throw": 0.4, "arc": 0.2 } },
+    { "id": "bottle2", "type": "pet_bottle", "name": "阿哲的寶特瓶",
+      "path": { "keys": [ { "t": 0, "v": [0, 0.5, -1.2] } ] },
+      "attach": { "actor": "zhe", "joint": "rHand", "to": 12.4, "throw": 0.4, "arc": 0.2 } },
+    { "id": "bench", "type": "bench", "yaw": 45, "path": { "keys": [ { "t": 0, "v": [-2.8, 0, -1.4] } ] } },
+    { "id": "sapling", "type": "tree", "name": "新種的樹苗", "scale": 0.32, "path": { "keys": [ { "t": 0, "v": [-1.0, 0, -2.5] } ] } },
+    { "id": "tree1", "type": "tree", "path": { "keys": [ { "t": 0, "v": [-6.5, 0, -4.5] } ] } },
+    { "id": "tree2", "type": "tree", "path": { "keys": [ { "t": 0, "v": [5.5, 0, -5.0] } ] } },
+    { "id": "bush1", "type": "bush", "path": { "keys": [ { "t": 0, "v": [3.6, 0, -2.6] } ] } },
+    { "id": "bush2", "type": "bush", "path": { "keys": [ { "t": 0, "v": [-4.4, 0, -2.4] } ] } },
+    { "id": "lamp", "type": "streetlight", "path": { "keys": [ { "t": 0, "v": [4.2, 0, -3.4] } ] } },
+    { "id": "fence1", "type": "fence", "path": { "keys": [ { "t": 0, "v": [-2.5, 0, -4.2] } ] } },
+    { "id": "fence2", "type": "fence", "path": { "keys": [ { "t": 0, "v": [0, 0, -4.2] } ] } },
+    { "id": "fence3", "type": "fence", "path": { "keys": [ { "t": 0, "v": [2.5, 0, -4.2] } ] } }
+  ],
+  "lights": [],
+  "cameras": [
+    { "id": "camA", "name": "A 機 全景", "path": { "keys": [ { "t": 0, "v": [0.8, 1.7, 8.5], "e": "inOut" }, { "t": 3.0, "v": [0.5, 1.6, 7.2] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 0, "v": [-1.0, 0.9, -0.4] } ] }, "lens": 28 },
+    { "id": "camB", "name": "B 機 低角度撿瓶", "path": { "keys": [ { "t": 3.0, "v": [0.6, 0.45, 2.9], "e": "inOut" }, { "t": 5.4, "v": [0.15, 0.45, 2.45] } ] },
+      "aim": { "mode": "actor", "actor": "ann" }, "lens": 35 },
+    { "id": "camC", "name": "C 機 跟到回收桶", "path": { "keys": [ { "t": 5.4, "v": [2.6, 1.3, 2.8], "e": "inOut" }, { "t": 8.4, "v": [1.7, 1.2, 1.9] } ] },
+      "aim": { "mode": "actor", "actor": "ann" }, "lens": 40 },
+    { "id": "camD", "name": "D 機 阿嬤拍手", "path": { "keys": [ { "t": 8.4, "v": [-0.9, 1.1, 1.0], "e": "inOut" }, { "t": 10.0, "v": [-1.15, 1.1, 0.7] } ] },
+      "aim": { "mode": "actor", "actor": "grandma", "offset": [0, 0.95, 0] }, "lens": 40 },
+    { "id": "camE", "name": "E 機 阿哲改主意", "path": { "keys": [ { "t": 10.0, "v": [2.6, 1.35, -3.0], "e": "inOut" }, { "t": 12.8, "v": [2.0, 1.35, -2.7] } ] },
+      "aim": { "mode": "actor", "actor": "zhe" }, "lens": 30 },
+    { "id": "camF", "name": "F 機 升起收尾", "path": { "keys": [ { "t": 12.8, "v": [0.4, 1.1, 3.0], "e": "inOut" }, { "t": 15.0, "v": [0.8, 7.5, 6.5] } ] },
+      "aim": { "mode": "point", "keys": [ { "t": 12.8, "v": [-0.4, 0.9, -0.7], "e": "inOut" }, { "t": 15.0, "v": [-0.4, 0, -1.2] } ] }, "lens": 28 }
+  ],
+  "cuts": [
+    { "t": 0, "camera": "camA", "note": "全景：清晨公園，小安從左邊走進來，看到地上的寶特瓶；阿嬤坐在長椅上，後方是新設的回收站和樹苗" },
+    { "t": 3.0, "camera": "camB", "note": "低角度中景：小安蹲下撿起寶特瓶" },
+    { "t": 5.4, "camera": "camC", "note": "中景跟拍：小安拿著瓶子走到分類回收桶，把瓶子丟進去" },
+    { "t": 8.4, "camera": "camD", "note": "中景：長椅上的阿嬤看到，笑著拍手" },
+    { "t": 10.0, "camera": "camE", "note": "中景（回收桶後方反拍）：阿哲正要把瓶子丟進一般垃圾桶，停手轉頭看向小安和阿嬤，改走到回收桶丟進去" },
+    { "t": 12.8, "camera": "camF", "note": "升降鏡頭：三人在回收桶旁相視而笑，小安開心跳起，鏡頭從樹苗高度升起，帶出整個乾淨的公園" }
+  ],
+  "assets": [
+    {
+      "id": "recycle_bin", "label": "分類回收桶", "cat": "small", "color": "#2e7d32",
+      "desc": "寬 45 公分、高 85 公分的戶外資源回收桶，正面有投入口與回收標誌",
+      "parts": [
+        {"name": "桶身", "shape": "box", "size": [0.45, 0.8, 0.45], "pos": [0, 0.4, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "桶蓋", "shape": "box", "size": [0.48, 0.05, 0.48], "pos": [0, 0.825, 0], "rot": [0, 0, 0], "color": "#1b5e20"},
+        {"name": "投入口", "shape": "box", "size": [0.25, 0.04, 0.02], "pos": [0, 0.7, 0.226], "rot": [0, 0, 0], "color": "#111111"},
+        {"name": "標籤", "shape": "box", "size": [0.26, 0.2, 0.01], "pos": [0, 0.46, 0.23], "rot": [0, 0, 0], "color": "#ffffff"},
+        {"name": "回收標誌", "shape": "torus", "radius": 0.055, "tube": 0.012, "arc": 300, "pos": [0, 0.46, 0.238], "rot": [0, 0, 0], "color": "#2e7d32"}
+      ]
+    },
+    {
+      "id": "trash_bin", "label": "一般垃圾桶", "cat": "small", "color": "#6d6d6d",
+      "desc": "寬 45 公分、高 85 公分的戶外一般垃圾桶，和分類回收桶同尺寸",
+      "parts": [
+        {"name": "桶身", "shape": "box", "size": [0.45, 0.8, 0.45], "pos": [0, 0.4, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "桶蓋", "shape": "box", "size": [0.48, 0.05, 0.48], "pos": [0, 0.825, 0], "rot": [0, 0, 0], "color": "#3a3a3a"},
+        {"name": "投入口", "shape": "box", "size": [0.25, 0.04, 0.02], "pos": [0, 0.7, 0.226], "rot": [0, 0, 0], "color": "#111111"},
+        {"name": "標籤", "shape": "box", "size": [0.26, 0.2, 0.01], "pos": [0, 0.46, 0.23], "rot": [0, 0, 0], "color": "#d9d9d9"}
+      ]
+    },
+    {
+      "id": "pet_bottle", "label": "寶特瓶", "cat": "small", "color": "#bfe6ff",
+      "desc": "高 22 公分的 600 毫升寶特瓶，可以拿在手上",
+      "hold": {"grip": [0, 0.1, 0], "rot": [0, 0, 0]},
+      "parts": [
+        {"name": "瓶身", "shape": "cylinder", "radius": 0.033, "height": 0.17, "pos": [0, 0.085, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "瓶肩", "shape": "cylinder", "radius": 0.033, "radiusTop": 0.014, "height": 0.035, "pos": [0, 0.1875, 0], "rot": [0, 0, 0], "color": null},
+        {"name": "瓶蓋", "shape": "cylinder", "radius": 0.015, "height": 0.02, "pos": [0, 0.215, 0], "rot": [0, 0, 0], "color": "#1e88e5"},
+        {"name": "標籤", "shape": "cylinder", "radius": 0.034, "height": 0.06, "pos": [0, 0.09, 0], "rot": [0, 0, 0], "color": "#1e88e5"}
+      ]
+    }
+  ]
+}

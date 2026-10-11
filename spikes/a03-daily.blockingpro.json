@@ -1,0 +1,909 @@
+{
+ "format": "blockingpro",
+ "version": 2,
+ "name": "a03 日常動作驗收",
+ "settings": {
+  "width": 1280,
+  "height": 720,
+  "fps": 30,
+  "duration": 8,
+  "lighting": "day"
+ },
+ "actors": [
+  {
+   "id": "pusher",
+   "name": "推門的人",
+   "kind": "human",
+   "preset": "man",
+   "color": "#3d5a80",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -5.83,
+       0,
+       0.45
+      ]
+     }
+    ]
+   },
+   "actions": [],
+   "upper": [
+    {
+     "type": "openDoor",
+     "start": 1,
+     "dur": 2.5,
+     "params": {
+      "push": 1
+     }
+    }
+   ],
+   "facing": "fixed",
+   "yaw": 180
+  },
+  {
+   "id": "puller",
+   "name": "拉門的人",
+   "kind": "human",
+   "preset": "woman",
+   "color": "#e07a5f",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -5.745,
+       0,
+       -0.44
+      ]
+     }
+    ]
+   },
+   "actions": [],
+   "upper": [
+    {
+     "type": "openDoor",
+     "start": 4,
+     "dur": 2.5,
+     "params": {
+      "push": 0
+     }
+    }
+   ],
+   "facing": "fixed",
+   "yaw": 0
+  },
+  {
+   "id": "typist",
+   "name": "打字的人",
+   "kind": "human",
+   "preset": "man",
+   "color": "#81b29a",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -2,
+       0,
+       0.16
+      ]
+     }
+    ]
+   },
+   "actions": [
+    {
+     "type": "sitting",
+     "start": 0,
+     "dur": 8,
+     "params": {
+      "seat": 0.45
+     }
+    }
+   ],
+   "upper": [
+    {
+     "type": "typing",
+     "start": 0.5,
+     "dur": 7.5
+    }
+   ],
+   "facing": "fixed",
+   "yaw": 180
+  },
+  {
+   "id": "mover",
+   "name": "搬箱子的人",
+   "kind": "human",
+   "preset": "man",
+   "color": "#f2cc8f",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       2,
+       0,
+       1.5
+      ]
+     },
+     {
+      "t": 2.9,
+      "v": [
+       2,
+       0,
+       1.5
+      ]
+     },
+     {
+      "t": 4.4,
+      "v": [
+       2,
+       0,
+       0
+      ]
+     }
+    ]
+   },
+   "actions": [
+    {
+     "type": "liftBox",
+     "start": 0.5,
+     "dur": 2.4
+    },
+    {
+     "type": "putDown",
+     "start": 4.6,
+     "dur": 2.4
+    }
+   ],
+   "upper": [
+    {
+     "type": "carry",
+     "start": 2.8,
+     "dur": 1.9,
+     "params": {
+      "ready": 1
+     }
+    }
+   ],
+   "facing": "fixed",
+   "yaw": 180
+  },
+  {
+   "id": "mom",
+   "name": "抱小孩的人",
+   "kind": "human",
+   "preset": "woman",
+   "color": "#9c6ade",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       6,
+       0,
+       0
+      ]
+     }
+    ]
+   },
+   "actions": [],
+   "upper": [
+    {
+     "type": "holdChild",
+     "start": 0,
+     "dur": 8
+    }
+   ],
+   "facing": "fixed",
+   "yaw": 0
+  },
+  {
+   "id": "walker",
+   "name": "邊走邊滑手機",
+   "kind": "human",
+   "preset": "man",
+   "color": "#e76f51",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       10,
+       0,
+       3
+      ]
+     },
+     {
+      "t": 6,
+      "v": [
+       10,
+       0,
+       -3
+      ]
+     }
+    ]
+   },
+   "actions": [],
+   "upper": [
+    {
+     "type": "lookPhone",
+     "start": 0,
+     "dur": 3
+    },
+    {
+     "type": "phone",
+     "start": 3.2,
+     "dur": 3.5
+    }
+   ]
+  },
+  {
+   "id": "climber",
+   "name": "爬樓梯的人",
+   "kind": "human",
+   "preset": "man",
+   "color": "#2a9d8f",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       14,
+       0,
+       3
+      ]
+     },
+     {
+      "t": 4.5,
+      "v": [
+       14,
+       0,
+       -1.9
+      ]
+     }
+    ]
+   },
+   "actions": [],
+   "upper": []
+  },
+  {
+   "id": "rider",
+   "name": "騎機車的人",
+   "kind": "human",
+   "preset": "man",
+   "color": "#264653",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 1,
+      "v": [
+       18,
+       0,
+       6
+      ]
+     },
+     {
+      "t": 7,
+      "v": [
+       18,
+       0,
+       -6
+      ]
+     }
+    ]
+   },
+   "actions": [
+    {
+     "type": "ride",
+     "start": 0,
+     "dur": 8,
+     "params": {
+      "vehicle": "motorcycle"
+     }
+    }
+   ],
+   "upper": [],
+   "facing": "fixed",
+   "yaw": 180
+  },
+  {
+   "id": "cyclist",
+   "name": "騎腳踏車的人",
+   "kind": "human",
+   "preset": "woman",
+   "color": "#c1121f",
+   "path": {
+    "curve": "smooth",
+    "keys": [
+     {
+      "t": 1,
+      "v": [
+       24,
+       0,
+       6
+      ]
+     },
+     {
+      "t": 7,
+      "v": [
+       24,
+       0,
+       -6
+      ]
+     }
+    ]
+   },
+   "actions": [
+    {
+     "type": "ride",
+     "start": 0,
+     "dur": 8,
+     "params": {
+      "vehicle": "bike"
+     }
+    }
+   ],
+   "upper": [],
+   "facing": "fixed",
+   "yaw": 180
+  }
+ ],
+ "props": [
+  {
+   "id": "door",
+   "name": "門",
+   "type": "door",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -6,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "desk",
+   "name": "辦公桌",
+   "type": "desk",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -2,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "chair",
+   "name": "椅子",
+   "type": "chair",
+   "yaw": 180,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -2,
+       0,
+       0.56
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "box",
+   "name": "箱子",
+   "type": "box",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       2,
+       0,
+       1.01
+      ]
+     },
+     {
+      "t": 1.508,
+      "v": [
+       2,
+       0,
+       1.01
+      ]
+     },
+     {
+      "t": 5.752,
+      "v": [
+       2,
+       0,
+       -0.49
+      ]
+     }
+    ]
+   },
+   "attach": {
+    "actor": "mover",
+    "from": 1.508,
+    "to": 5.752
+   }
+  },
+  {
+   "id": "baby",
+   "name": "嬰兒",
+   "type": "baby",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       6,
+       0,
+       1
+      ]
+     }
+    ]
+   },
+   "attach": {
+    "actor": "mom",
+    "from": 0
+   }
+  },
+  {
+   "id": "phone",
+   "name": "手機",
+   "type": "phone",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       10,
+       0,
+       3
+      ]
+     }
+    ]
+   },
+   "attach": {
+    "actor": "walker",
+    "from": 0
+   }
+  },
+  {
+   "id": "stairs",
+   "name": "樓梯",
+   "type": "stairs",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       14,
+       0,
+       0
+      ]
+     }
+    ]
+   }
+  },
+  {
+   "id": "top",
+   "name": "樓梯頂平台",
+   "type": "stage",
+   "yaw": 0,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       14,
+       0,
+       -1.86
+      ]
+     }
+    ]
+   },
+   "scale": [
+    0.3,
+    2.3333,
+    0.4
+   ]
+  },
+  {
+   "id": "moto",
+   "name": "機車",
+   "type": "motorcycle",
+   "yaw": 180,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       18,
+       0,
+       6
+      ]
+     }
+    ]
+   },
+   "attach": {
+    "actor": "rider",
+    "joint": "root",
+    "from": 0
+   }
+  },
+  {
+   "id": "bike",
+   "name": "腳踏車",
+   "type": "bike",
+   "yaw": 180,
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       24,
+       0,
+       6
+      ]
+     }
+    ]
+   },
+   "attach": {
+    "actor": "cyclist",
+    "joint": "root",
+    "from": 0
+   }
+  }
+ ],
+ "lights": [],
+ "cameras": [
+  {
+   "id": "camDoor",
+   "name": "門 側面",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -3.7,
+       1.5,
+       0.3
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "point",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -5.9,
+       1,
+       0
+      ]
+     }
+    ]
+   },
+   "lens": 30
+  },
+  {
+   "id": "camDoorF",
+   "name": "門 推門側",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -4.6,
+       1.6,
+       2.6
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "point",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -5.9,
+       1,
+       0.2
+      ]
+     }
+    ]
+   },
+   "lens": 30
+  },
+  {
+   "id": "camDesk",
+   "name": "辦公桌",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -0.9,
+       1.5,
+       1.7
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "point",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       -2,
+       0.85,
+       0.15
+      ]
+     }
+    ]
+   },
+   "lens": 32
+  },
+  {
+   "id": "camBox",
+   "name": "箱子",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       4.3,
+       1.4,
+       1.0
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "point",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       2,
+       0.7,
+       0.5
+      ]
+     }
+    ]
+   },
+   "lens": 30
+  },
+  {
+   "id": "camBaby",
+   "name": "抱小孩",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       5.3,
+       1.45,
+       1.9
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "point",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       6,
+       1.15,
+       0
+      ]
+     }
+    ]
+   },
+   "lens": 40
+  },
+  {
+   "id": "camPhone",
+   "name": "手機 正面跟拍",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       10,
+       1.5,
+       3
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "actor",
+    "actor": "walker",
+    "offset": [
+     0,
+     1.4,
+     0
+    ]
+   },
+   "lens": 35,
+   "mount": {
+    "actor": "walker",
+    "offset": [
+     0.4,
+     1.5,
+     1.8
+    ],
+    "rotate": true
+   }
+  },
+  {
+   "id": "camStairs",
+   "name": "樓梯 側面",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       16.9,
+       1.6,
+       0.6
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "point",
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       14,
+       1.1,
+       0
+      ]
+     }
+    ]
+   },
+   "lens": 26
+  },
+  {
+   "id": "camMoto",
+   "name": "機車 側面跟拍",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       18,
+       1,
+       6
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "actor",
+    "actor": "rider"
+   },
+   "lens": 30,
+   "mount": {
+    "actor": "rider",
+    "offset": [
+     -3,
+     1.1,
+     0
+    ],
+    "rotate": true
+   }
+  },
+  {
+   "id": "camBike",
+   "name": "腳踏車 側面跟拍",
+   "path": {
+    "keys": [
+     {
+      "t": 0,
+      "v": [
+       24,
+       1,
+       6
+      ]
+     }
+    ]
+   },
+   "aim": {
+    "mode": "actor",
+    "actor": "cyclist"
+   },
+   "lens": 30,
+   "mount": {
+    "actor": "cyclist",
+    "offset": [
+     -3,
+     1.1,
+     0
+    ],
+    "rotate": true
+   }
+  }
+ ],
+ "cuts": [
+  {
+   "t": 0,
+   "camera": "camDesk",
+   "note": "打字"
+  },
+  {
+   "t": 1,
+   "camera": "camBox",
+   "note": "搬起箱子"
+  },
+  {
+   "t": 2.5,
+   "camera": "camDoorF",
+   "note": "推門"
+  },
+  {
+   "t": 3.5,
+   "camera": "camPhone",
+   "note": "邊走邊講電話"
+  },
+  {
+   "t": 4.5,
+   "camera": "camDoor",
+   "note": "拉門"
+  },
+  {
+   "t": 5.5,
+   "camera": "camBox",
+   "note": "放下箱子"
+  },
+  {
+   "t": 6.2,
+   "camera": "camMoto",
+   "note": "騎機車"
+  },
+  {
+   "t": 7,
+   "camera": "camBike",
+   "note": "騎腳踏車"
+  }
+ ],
+ "assets": []
+}
